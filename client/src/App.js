@@ -23,24 +23,22 @@ class App extends Component {
   render() {
         return (
             <div className="app" >
-            <form >
-                <div className="navbar-form mgt-form" role="search">
-                <div className="input-group add-on mgt-form">
-                <input className="form-control" onChange={this.handleAddressChange} placeholder="Enter Address" required />
-                  <div className="input-group-btn">
-                    <button className="btn btn-default" onClick={this.checkAddress}type="button">
-                    <i className="glyphicon glyphicon-search"></i>
-                    </button>
-
-                  </div>
-                </div>
-                    <div className="error">
-                        {this.state.error}
+                <form >
+                    <div className="navbar-form mgt-form" role="search">
+                        <div className="input-group add-on mgt-form">
+                            <input className="form-control" onChange={this.handleAddressChange} placeholder="Enter Address" required />
+                            <div className="input-group-btn">
+                                <button className="btn btn-default" onClick={this.checkAddress}type="button">
+                                    <i className="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                            <div className="error">
+                                {this.state.error}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
-
-            <Tabs addressDetails={this.state.addressDetails}/>
+                </form>
+                <Tabs addressDetails={this.state.addressDetails}/>
             </div>
         )
     }
