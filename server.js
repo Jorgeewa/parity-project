@@ -29,9 +29,9 @@ app.get("/api/search", (req, res) => {
             api.eth.getBalance(address),
             api.eth.getCode(address),
             api.eth.blockNumber().then((res) => {
-                //endBlockNumber = res.toString();
-                endBlockNumber = 4892022;
-                startBlockNumber = endBlockNumber - 100;
+                endBlockNumber = res.toString();
+                //endBlockNumber = 4892022;
+                startBlockNumber = endBlockNumber - 50;
                 console.log("Searching for transactions to/from account \"" + address + "\" within blocks "  + startBlockNumber + " and " + endBlockNumber);
                     return promiseFor(() => {
                         console.log(startBlockNumber)
