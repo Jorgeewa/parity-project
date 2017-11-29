@@ -100,6 +100,12 @@
     color:black;
 }
 
+.panel-view tr td {
+    max-width: 0;
+    white-space: nowrap;
+    overflow: auto;
+}
+
 .panel-view tr th {
     font-family: queulatmedium;
     color: #352323;
@@ -121,6 +127,8 @@
     font-size: 10px;
     color: red;
 }
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

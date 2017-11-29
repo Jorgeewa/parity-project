@@ -4,7 +4,7 @@ import Tab from "react-simpletabs";
 class Tabs extends React.Component{
     
   render() {
-      const sentTransactions = this.props.addressDetails.transactionSent.map((transaction, index) =>(
+      const sentTransactions = this.props.addressDetails.transactionSent.map((transaction, index) => (
             <tr key={index}>
               <td>{transaction.addressTo}</td>
               <td>{transaction.gasPrice}</td>
@@ -13,7 +13,7 @@ class Tabs extends React.Component{
             </tr>
       ));
       
-      const receivedTransactions = this.props.addressDetails.transactionReceived.map((transaction, index) =>(
+      const receivedTransactions = this.props.addressDetails.transactionReceived.map((transaction, index) => (
             <tr key={index}>
               <td>{transaction.addressFrom}</td>
               <td>{transaction.gasPrice}</td>
