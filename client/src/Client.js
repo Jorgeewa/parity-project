@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 function search(query, cb) {
   return fetch(`api/search?address=${query}`,  {
     accept: "application/json"

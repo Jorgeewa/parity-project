@@ -1,5 +1,4 @@
-const express = require("express");
-const fs = require("fs");
+const express = require('express');
 const bodyParser = require('body-parser');
 const parityApi = require('@parity/api');
 const bluebirdPromise = require('bluebird');
@@ -18,7 +17,7 @@ app.get("/api/search", (req, res) => {
     const invalid = 'INVALID_PARAMS';
     var transactionDetails = [];
     
-    var promiseFor = bluebirdPromise.method(function(condition, action, value) {
+    var promiseFor = bluebirdPromise.method((condition, action, value) => {
         if (!condition(value)) return value;
         return action(value).then(promiseFor.bind(null, condition, action));
     });
@@ -29,22 +28,20 @@ app.get("/api/search", (req, res) => {
             api.eth.getTransactionCount(address),
             api.eth.getBalance(address),
             api.eth.getCode(address),
-            api.eth.blockNumber().then(function(res){
+            api.eth.blockNumber().then((res) => {
                 endBlockNumber = res.toString();
                 //endBlockNumber = 4892022;
                 startBlockNumber = endBlockNumber - 100;
                 console.log("Searching for transactions to/from account \"" + address + "\" within blocks "  + startBlockNumber + " and " + endBlockNumber);
-                    return promiseFor(function(){
+                    return promiseFor(() => {
                         console.log(startBlockNumber)
                         return startBlockNumber < endBlockNumber;
-                    }, function(start){
+                    }, (start) => {
                     return api.eth.getBlockByNumber(start, true).then((block) => {
                         console.log(startBlockNumber);
                         if (block != null && block.transactions[0] != null) {
-                            console.log(block.transactions[0] == null, "I ran blcok trans")
-                            bluebirdPromise.map(block.transactions, function(e) {
-                                console.log(e.from, "I ran inside map");
-                                if (address == "*" || address == e.from || address == e.to) {
+                            bluebirdPromise.map(block.transactions, (e) => {
+                                if (address == e.from || address == e.to) {
                                     console.log("found a txn")
                                     blockDetails = {
                                         'direction' : address == e.from ? 'from' : 'to',
@@ -55,9 +52,10 @@ app.get("/api/search", (req, res) => {
                                         'gasPrice' : e.gasPrice,
                                         'time' : new Date(block.timestamp).toGMTString()
                                     }
+                                    //push found addresses into array
                                     transactionDetails.push(blockDetails);
                                 }
-                            }).then(function(){
+                            }).then(() => {
                             return startBlockNumber++;
                             });
                         } else{
@@ -81,11 +79,11 @@ app.get("/api/search", (req, res) => {
                 error: "Missing required parameter (address) or address is invalid"
             });
             Promise.reject('wrong parameter');
-            return;
+            return;//stop the function if the address is not correct
         }
     });
 });
 
 app.listen(app.get("port"), () => {
-  console.log(`Find the server at: http://localhost:${app.get("port")}/`); // eslint-disable-line no-console
+  console.log(`Find the server at: http://localhost:${app.get("port")}/`);
 });

@@ -24,18 +24,18 @@ class App extends Component {
         return (
             <div className="app" >
                 <form >
-                    <div className="navbar-form mgt-form" role="search">
-                        <div className="input-group add-on mgt-form">
+                    <div className="navbar-form" role="search">
+                        <div className="input-group add-on">
                             <input className="form-control" onChange={this.handleAddressChange} placeholder="Enter Address" required />
                             <div className="input-group-btn">
                                 <button className="btn btn-default" onClick={this.checkAddress}type="button">
                                     <i className="glyphicon glyphicon-search"></i>
                                 </button>
                             </div>
+                        </div>
                             <div className="error">
                                 {this.state.error}
                             </div>
-                        </div>
                     </div>
                 </form>
                 <Tabs addressDetails={this.state.addressDetails}/>
@@ -44,7 +44,6 @@ class App extends Component {
     }
     
     handleAddressChange(e){
-        console.log(e.target.value)
         this.setState({address:e.target.value})
     }
 
@@ -52,7 +51,6 @@ class App extends Component {
     checkAddress(){
         Client.search(this.state.address, addressDetails => {
             if(addressDetails.error){
-                console.log(addressDetails.error);
                 this.setState({
                   error : addressDetails.error
                 });
@@ -62,10 +60,10 @@ class App extends Component {
                 accountBalance: addressDetails.accountBalance,
                 transactionCount: addressDetails.transactionCount,
                 type : addressDetails.type,
-                transactionSent : addressDetails.transactionDetails.filter(function(transaction){
+                transactionSent : addressDetails.transactionDetails.filter((transaction) => {
                     return transaction.direction === 'from'
                 }),
-                transactionReceived : addressDetails.transactionDetails.filter(function(transaction){
+                transactionReceived : addressDetails.transactionDetails.filter((transaction) => {
                     return transaction.direction === 'to'
                 })
             }

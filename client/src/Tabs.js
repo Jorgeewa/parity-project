@@ -68,7 +68,6 @@ class Tabs extends React.Component{
                 <table className="ui selectable structured large table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Block hash</th>
                             <th>Sender Address</th>
                             <th>Gas price</th>
                             <th>Value</th>
