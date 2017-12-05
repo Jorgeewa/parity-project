@@ -5,6 +5,7 @@
   "dependencies": {
     "@parity/api": "^2.1.5",
     "babel-core": "6.14.0",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "express": "4.13.3",
     "fs": "0.0.2",
