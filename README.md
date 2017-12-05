@@ -1,6 +1,6 @@
 This is a project that uses the parity api to make some basic calls.
 
-Download and go into folder and run npm install.
+Download and go into the folder and run npm install. Go into the client folder and run npm install too. You will have to install concurrently for it to run though. So do npm install --save.
 
 run npm start. This will run the client and backend server concurrently.
 
